@@ -17,19 +17,31 @@ class Builder
 {
     protected $configuration;
     
+    /**
+     * @param Dollyaswin\Cli\Table\Configuration $configuration
+     */
     public function __construct(Configuration $configuration)
     {
         $this->configuration = $configuration;    
     }
     
+    /**
+     * Get Configuration object
+     * 
+     * @return Dollyaswin\Cli\Table\Configuration
+     */
     public function getConfiguration()
     {
         return $this->configuration;
     }
     
+    /**
+     * Get table output
+     * 
+     * @return string
+     */
     public function getTable()
     {
-        $isBordered = $this->getConfiguration()->isBordered();
         $table  = '';
         $table .= $this->getHeader();
         $table .= $this->getBody();
@@ -37,6 +49,11 @@ class Builder
         return $table;
     }
     
+    /**
+     * Get header string
+     * 
+     * @return string
+     */
     protected function getHeader()
     {
         $string  = '';
@@ -71,6 +88,11 @@ class Builder
         return $string;
     }
     
+    /**
+     * Get body string
+     * 
+     * @return string
+     */
     protected function getBody()
     {
         $string  = '';
@@ -107,6 +129,11 @@ class Builder
         return ($this->getConfiguration()->isBordered()) ? rtrim($string, PHP_EOL)  . $this->getHr() : $string;
     }
     
+    /**
+     * Get line
+     * 
+     * @return string
+     */
     protected function getHr()
     {
         $string  = '';
