@@ -32,7 +32,6 @@ $data = [
             ],
         ];
 $config = new Configuration();
-// $config->setHeader(['Name', 'Color', 'Element', 'Likes'])
 $config->setData($data)
        ->setIsBordered(true)
        ->setPadding([15, 10, 15, 15])
@@ -43,6 +42,5 @@ $config->setData($data)
                               Configuration::ALIGN_CENTER
                             ]);
 $builder = new Builder($config);
-// print_r($config->getHeader());
 echo $builder->getTable();
 

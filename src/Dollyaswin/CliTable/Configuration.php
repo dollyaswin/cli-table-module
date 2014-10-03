@@ -26,9 +26,9 @@ class Configuration
     
     protected $isBordered;
     
-    protected $padding;
+    protected $padding = [];
     
-    protected $headerAlignment;
+    protected $headerAlignment = [];
     
 	/**
 	 * @return the $data
@@ -108,6 +108,19 @@ class Configuration
 	 */
 	public function getPadding()
 	{
+	    $headers = $this->getHeader();
+	    $padding = [];
+	    
+	    // if padding array element is not same with header array element
+	    if (count($this->padding) != count($headers)) {
+	        foreach ($headers as $key => $header) {
+	            // create padding element by add 4 spaces, intended to not defined padding
+	            $padding[$key] = (isset($this->padding[$key])) ? $this->padding[$key] : strlen($header) + 4;
+	        }
+	            
+	        $this->padding = $padding;
+	    }    
+	    
 		return $this->padding;
 	}
 
@@ -125,8 +138,17 @@ class Configuration
 	 */
 	public function getHeaderAlignment()
 	{
-	    if (!isset($this->headerAlignment)) {
-	        $this->headerAlignment = array_fill(0, count($this->getHeaders()), '');
+	    $headers   = $this->getHeader();
+	    $alignment = [];
+	    
+	    // if header alignment array element is not same with header array element
+	    if (count($this->headerAlignment) != count($headers)) {
+	        foreach ($headers as $key => $header) {
+	            // // create header alignment element with 1 as value, intended to not defined alignment
+	            $alignment[$key] = (isset($this->headerAlignment[$key])) ? $this->headerAlignment[$key] : 1;
+	        }
+
+	        $this->headerAlignment = $alignment;
 	    }
 	    
 		return $this->headerAlignment;
