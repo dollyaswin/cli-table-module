@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Dollyaswin\\CliTable\\" : "src/Dollyaswin/CliTable"
+            "Dollyaswin\\Cli\\Table\\" : "src/Dollyaswin/Cli/Table"
         }
     }
 }

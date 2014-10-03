@@ -1,5 +1,6 @@
 nbproject
 composer.phar
+composer.lock
 ._*
 .~lock.*
 .buildpath

@@ -4,10 +4,10 @@
  * @package Dollyaswin
  */
 
-namespace Dollyaswin\CliTable;
+namespace Dollyaswin\Cli\Table;
 
-use Dollyaswin\CliTable\Configuration;
-use Dollyaswin\CliColor\Builder as ColorBuilder;
+use Dollyaswin\Cli\Table\Configuration;
+use Dollyaswin\Cli\Color\Builder as ColorBuilder;
 
 /**
  *

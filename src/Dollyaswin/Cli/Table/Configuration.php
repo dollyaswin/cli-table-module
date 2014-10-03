@@ -4,12 +4,12 @@
  * @package Dollyaswin
  */
 
-namespace Dollyaswin\CliTable;
+namespace Dollyaswin\Cli\Table;
 
-use Dollyaswin\CliTable\Exception\InvalidDataStructure;
-use Dollyaswin\CliColor\Builder as ColorBuilder;
-use Dollyaswin\CliColor\Background\Color as BgColor;
-use Dollyaswin\CliColor\Text\Color as TextColor;
+use Dollyaswin\Cli\Table\Exception\InvalidDataStructure;
+use Dollyaswin\Cli\Color\Builder as ColorBuilder;
+use Dollyaswin\Cli\Color\Background\Color as BgColor;
+use Dollyaswin\Cli\Color\Text\Color as TextColor;
 
 /**
  *
@@ -180,9 +180,9 @@ class Configuration
 	}
 
 	/**
-	 * @param Dollyaswin\CliColor\Builder $colorBuilder
+	 * @param Dollyaswin\Cli\Color\Builder $colorBuilder
 	 */
-	public function setColorBuilder(\Dollyaswin\CliColor\Builder $colorBuilder)
+	public function setColorBuilder(\Dollyaswin\Cli\Color\Builder $colorBuilder)
 	{
 		$this->colorBuilder = $colorBuilder;
 		return $this;

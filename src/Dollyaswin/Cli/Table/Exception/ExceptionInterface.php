@@ -2,7 +2,7 @@
 /**
  * @license    MIT
  */
-namespace Dollyaswin\CliTable\Exception;
+namespace Dollyaswin\Cli\Table\Exception;
 
 /**
  * @author  Dolly Aswin <dolly.aswin@gmail.com>

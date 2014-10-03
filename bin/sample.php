@@ -1,10 +1,10 @@
 <?php
 
-use Dollyaswin\CliTable\Configuration;
-use Dollyaswin\CliTable\Builder as TableBuilder;
-use Dollyaswin\CliColor\Builder as ColorBuilder;
-use Dollyaswin\CliColor\Background\Color as BgColor;
-use Dollyaswin\CliColor\Text\Color as TextColor;
+use Dollyaswin\Cli\Table\Configuration;
+use Dollyaswin\Cli\Table\Builder as TableBuilder;
+use Dollyaswin\Cli\Color\Builder as ColorBuilder;
+use Dollyaswin\Cli\Color\Background\Color as BgColor;
+use Dollyaswin\Cli\Color\Text\Color as TextColor;
 
 $loader = require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -12,7 +12,7 @@ if (!isset($loader)) {
     throw new RuntimeException('vendor/autoload.php could not be found. Did you run `php composer.phar install`?');
 }
 
-$loader->add('Dollyaswin\CliTable', __DIR__);
+$loader->add('Dollyaswin\Cli\Table', __DIR__);
 
 $data = [
             [

@@ -3,7 +3,7 @@
  * @license    MIT
  */
 
-namespace Dollyaswin\CliTable\Exception;
+namespace Dollyaswin\Cli\Table\Exception;
 
 /**
  *
