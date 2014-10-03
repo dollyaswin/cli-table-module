@@ -7,6 +7,7 @@
 namespace Dollyaswin\CliTable;
 
 use Dollyaswin\CliTable\Configuration;
+use Dollyaswin\CliColor\Builder as ColorBuilder;
 
 /**
  *
@@ -14,21 +15,21 @@ use Dollyaswin\CliTable\Configuration;
  */
 class Builder
 {
-    protected $config;
+    protected $configuration;
     
-    public function __construct(Configuration $config)
+    public function __construct(Configuration $configuration)
     {
-        $this->config = $config;    
+        $this->configuration = $configuration;    
     }
     
-    public function getConfig()
+    public function getConfiguration()
     {
-        return $this->config;
+        return $this->configuration;
     }
     
     public function getTable()
     {
-        $isBordered = $this->getConfig()->isBordered();
+        $isBordered = $this->getConfiguration()->isBordered();
         $table  = '';
         $table .= $this->getHeader();
         $table .= $this->getBody();
@@ -39,61 +40,78 @@ class Builder
     protected function getHeader()
     {
         $string  = '';
-        $headers = $this->getConfig()->getHeader();
-        $padding = $this->getConfig()->getPadding();
-        $alignment  = $this->getConfig()->getHeaderAlignment();
-        $isBordered = $this->getConfig()->isBordered();
+        $headers = $this->getConfiguration()->getHeader();
+        $padding = $this->getConfiguration()->getPadding();
+        $alignment  = $this->getConfiguration()->getHeaderAlignment();
+        $headerTextColor = $this->getConfiguration()->getHeaderTextColor();
+        $headerBgColor   = $this->getConfiguration()->getHeaderBgColor();
         
         foreach ($headers as $key => $header) {
-            $string .= str_pad($header, $padding[$key], ' ', $alignment[$key]);
+            $content = ' ' . str_pad($header, $padding[$key], ' ', $alignment[$key]) . ' ';
             
-            if ($isBordered) {
-                $string .= ' | ';
+            if ($this->getConfiguration()->getColorBuilder() instanceof ColorBuilder) {
+                $string .= $this->getConfiguration()
+                                ->getColorBuilder()
+                                ->getColoredString($content, $headerTextColor[$key], $headerBgColor[$key]);
+            } else {
+                $string .= $content;
+            }
+            
+            if ($this->getConfiguration()->isBordered()) {
+                $string .= '|';
             }
         }
         
-        if ($isBordered) {
-            $string = $this->getHr() . '| ' . $string . $this->getHr();
+        if ($this->getConfiguration()->isBordered()) {
+            $string = $this->getHr() . '|' . $string . $this->getHr();
         } else {
             $string .= PHP_EOL;
         }
-        
+
         return $string;
-        
     }
     
     protected function getBody()
     {
         $string  = '';
-        $data = $this->getConfig()->getData();
-        $headers = $this->getConfig()->getHeader();
-        $padding = $this->getConfig()->getPadding();
-        $isBordered = $this->getConfig()->isBordered();
+        $data    = $this->getConfiguration()->getData();
+        $headers = $this->getConfiguration()->getHeader();
+        $padding = $this->getConfiguration()->getPadding();
+        $headerTextColor = $this->getConfiguration()->getHeaderTextColor();
+        $headerBgColor   = $this->getConfiguration()->getHeaderBgColor();
         
         foreach ($data as $record) {
-            if ($isBordered) {
-                $string .= '| ';
+            if ($this->getConfiguration()->isBordered()) {
+                $string .= '|';
             }
                 
             foreach ($headers as $key => $header) {
-                $string .= str_pad((isset($record[$header])) ? $record[$header] : ' ', $padding[$key]);
+                $content = ' ' . str_pad((isset($record[$header])) ? $record[$header] : ' ', $padding[$key]) .' ';
+                if ($this->getConfiguration()->getColorBuilder() instanceof ColorBuilder) {
+                    $string .= $this->getConfiguration()
+                                    ->getColorBuilder()
+                                    ->getColoredString($content, $headerTextColor[$key], $headerBgColor[$key]);
+                } else {
+                    $string .= $content;
+                }
+                 
                 
-                if ($isBordered) {
-                	$string .= ' | ';
+                if ($this->getConfiguration()->isBordered()) {
+                	$string .= '|';
                 }
             }            
         	
             $string .= PHP_EOL;
         }
         
-        return ($isBordered) ? rtrim($string, PHP_EOL)  . $this->getHr() : $string;
+        return ($this->getConfiguration()->isBordered()) ? rtrim($string, PHP_EOL)  . $this->getHr() : $string;
     }
     
     protected function getHr()
     {
         $string  = '';
-        $headers = $this->getConfig()->getHeader();
-        $padding = $this->getConfig()->getPadding();
+        $headers = $this->getConfiguration()->getHeader();
+        $padding = $this->getConfiguration()->getPadding();
         
         foreach ($headers as $key => $header) {
         	$string .= str_pad('+', ($padding[$key])  + 3, '-');

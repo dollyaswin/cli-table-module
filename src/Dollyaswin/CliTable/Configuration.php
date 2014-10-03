@@ -7,6 +7,9 @@
 namespace Dollyaswin\CliTable;
 
 use Dollyaswin\CliTable\Exception\InvalidDataStructure;
+use Dollyaswin\CliColor\Builder as ColorBuilder;
+use Dollyaswin\CliColor\Background\Color as BgColor;
+use Dollyaswin\CliColor\Text\Color as TextColor;
 
 /**
  *
@@ -29,6 +32,12 @@ class Configuration
     protected $padding = [];
     
     protected $headerAlignment = [];
+    
+    protected $colorBuilder;
+    
+    protected $headerBgColor   = [];
+    
+    protected $headerTextColor = [];
     
 	/**
 	 * @return the $data
@@ -162,7 +171,53 @@ class Configuration
 		$this->headerAlignment = $headerAlignment;
 		return $this;
 	}
+	/**
+	 * @return the $colorBuilder
+	 */
+	public function getColorBuilder()
+	{
+		return $this->colorBuilder;
+	}
 
+	/**
+	 * @param Dollyaswin\CliColor\Builder $colorBuilder
+	 */
+	public function setColorBuilder(\Dollyaswin\CliColor\Builder $colorBuilder)
+	{
+		$this->colorBuilder = $colorBuilder;
+		return $this;
+	}
+	/**
+	 * @return the $headerBgColor
+	 */
+	public function getHeaderBgColor()
+	{
+		return $this->headerBgColor;
+	}
 
+	/**
+	 * @param array $headerBgColor
+	 */
+	public function setHeaderBgColor(Array $headerBgColor) 
+	{
+		$this->headerBgColor = $headerBgColor;
+		return $this;
+	}
 
+	/**
+	 * @return the $headerTextColor
+	 */
+	public function getHeaderTextColor()
+	{
+		return $this->headerTextColor;
+	}
+
+	/**
+	 * @param array $headerTextColor
+	 */
+	public function setHeaderTextColor(Array $headerTextColor)
+	{
+		$this->headerTextColor = $headerTextColor;
+		return $this;
+	}
 }

@@ -1,7 +1,10 @@
 <?php
 
 use Dollyaswin\CliTable\Configuration;
-use Dollyaswin\CliTable\Builder;
+use Dollyaswin\CliTable\Builder as TableBuilder;
+use Dollyaswin\CliColor\Builder as ColorBuilder;
+use Dollyaswin\CliColor\Background\Color as BgColor;
+use Dollyaswin\CliColor\Text\Color as TextColor;
 
 $loader = require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -31,6 +34,8 @@ $data = [
                 'Likes'   => 'Dancing'
             ],
         ];
+
+$colorBuilder = new ColorBuilder();
 $config = new Configuration();
 $config->setData($data)
        ->setIsBordered(true)
@@ -40,7 +45,20 @@ $config->setData($data)
                               Configuration::ALIGN_CENTER,
                               Configuration::ALIGN_CENTER,
                               Configuration::ALIGN_CENTER
+                            ])
+       ->setColorBuilder($colorBuilder)
+       ->setHeaderBgColor([
+                            BgColor::YELLOW,
+                            BgColor::RED,
+                            BgColor::BLUE,
+                            BgColor::BLACK
+                          ])
+       ->setHeaderTextColor([
+                              TextColor::LIGHT_GRAY,
+                              TextColor::YELLOW,
+                              TextColor::WHITE,
+                              TextColor::PURPLE
                             ]);
-$builder = new Builder($config);
-echo $builder->getTable();
+$table = new TableBuilder($config);
+echo $table->getTable();
 

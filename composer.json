@@ -12,11 +12,15 @@
             "email": "dolly.aswin@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:dollyaswin/cli-color-module"
+        }
+    ],
     "require": {
-        "php" : ">=5.4"
-    },
-    "require-dev": {
-        "phpunit/phpunit" : ">=3.7"
+        "php" : ">=5.4",
+        "dollyaswin/cli-color-module": "dev-master"
     },
     "autoload": {
         "psr-4": {
